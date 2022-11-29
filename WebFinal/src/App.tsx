@@ -11,10 +11,9 @@ function App() {
       
       <h1>Bem vindo ao Final Boss</h1>
       
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
+      
+      <div className="container-data">
+         
       </div>
       
     </div>
