@@ -10,7 +10,7 @@ const session: any = {}
 app.use(express.json())
 
 // STATIC
-app.use("/", express.static("../frontEnd/dist"))
+app.use("/", express.static("../WebFinal/index.html"))
 
 // BUSCAR TODOS OS USUÁRIOS
 app.get("/api/users", (req, res) => {
@@ -52,26 +52,12 @@ app.post("/api/user/", (req, res) => {
    // const duplicateEmailCheck = 'SELECT EXISTS(SELECT email FROM user WHERE email=?)'
    // let duplicateEmail = false
 
-
-
    if (!req.body.password)
-      errors.push("No password specified")
+     // errors.push("No password specified")
 
    if (!req.body.email) {
-      errors.push("No email specified")
+     // errors.push("No email specified")
    }
-
-   /* database.get(duplicateEmailCheck, [req.body.email], (err, row) => {
-      if (err) {
-         res.status(400).json({ "error": err.message })
-         console.log(err.message)
-         return
-      } 
-      duplicateEmail = JSON.parse(row)
-   })
-
-   if (duplicateEmail)
-      errors.push("Email already has an account!") */
 
    if (errors.length) {
       res.status(400).json({ "error": errors.join() })
@@ -177,46 +163,4 @@ app.post("/api/logoff/:sesid", (req, res) => {
    delete session[req.params.sesid]
    res.json({ "message": "success"})
 })
-
-// Image Create
-
-app.post("/api/upload/image", (req, res) => {
-   const errors = []
-   
-   if (!req.body.name){
-      errors.push("Image has no name.")
-   }
-   if(req.body.type == "jpeg" || req.body.type == "png" || req.body.type == "jpg"){
-      errors.push("Image type not suported. Use jpeg or png.")
-   } else if (!req.body.type) {
-      errors.push("File is typeless.")
-   }
-   if(!req.body.image){
-      errors.push("No image was uploaded.")
-   }
-   
-   if (errors.length) {
-      res.status(400).json({ "error": errors.join() })
-      return;
-   }
-
-   const { name, type, image } = req.body
-   const sql = 'INSERT INTO imagens (name, type, image) VALUES(?,?,?)'
-   const params = [name, type, image]
-   
-
-   database.run(sql, params, function (this: RunResult, err) {
-      if (err) {
-         res.status(400).json({ "error": err.message })
-         return
-      }
-
-      res.json({
-         "message": "success",
-         "data": { name, type, image },
-         "id": this.lastID
-      })
-   })
-})
-
 app.listen(port, () => console.log(`⚡ servidor ${port}`))

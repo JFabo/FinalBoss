@@ -1,5 +1,7 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import Login from "./pages/Login"
+import Cadastro from "./pages/Cadastro"
 import './App.css'
 
 function App() {
@@ -10,12 +12,15 @@ function App() {
       
       
       <h1>Bem vindo ao Final Boss</h1>
-      
-      
-      <div className="container-data">
-         
-      </div>
-      
+      <main>
+      <BrowserRouter>
+      <Routes>
+        
+        <Route path='/' element={<Login/>}/> 
+        
+      </Routes>
+    </BrowserRouter>
+    </main>
     </div>
   )
 }
