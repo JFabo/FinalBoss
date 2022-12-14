@@ -35,29 +35,31 @@ export default function () {
   
   
   return <>
-  <body>
-  <main>
+
+  <h1>Bem vindo ao Final Boss</h1>
+
   <div className="modal">
   <form onSubmit={enviarDados}>
       <h1>Login</h1>
+
       <div>
-      <label>Digite seu nickname:</label>
-      <input name="nickname" placeholder="GamerMonster123" />
+      <label htmlFor="nickname">Digite seu nickname: </label>
+      <input type="text" name="" id="nickname" placeholder="GamerMonster123" />
       </div>
 
       <div>
-      <label>Digite a sua senha:</label>
-      <input name="password" placeholder="***********" />
+      <label htmlFor="password">Digite a sua senha: </label>
+      <input type="text" name="" id="password" placeholder="***********" />
       </div>
     
       <div className="buttons">
-      <button onClick={() => {}}></button>
+      <button type="button" onClick={() => navigate("/Cadastro")}>Cadastrar-se</button>
+      <button type="button" onClick={() => navigate("/FSenha")}>Esqueci minha senha</button>
+      <button type="submit">&#8594;</button>
       </div>
       
     </form>
   </div>
-  </main>
-  </body>
   
   </>
 }

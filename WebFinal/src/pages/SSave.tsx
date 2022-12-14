@@ -6,25 +6,25 @@ export default function () {
   let navigate = useNavigate()
   const enviarDados: FormEventHandler<HTMLFormElement> = async ev => {
     ev.preventDefault()
-    const { _name, email, password } = ev.currentTarget
+    const { email, password } = ev.currentTarget
 
-    const request = await fetch(`/api/user/`, {
+    const request = await fetch(`/api/login/`, {
       method: "POST",
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        name: _name.value,
         email: email.value,
         password: password.value
       })
     })
 
+    const responseData = await request.json()
+
     if (request.status >= 200 && request.status <= 299) {
+      localStorage.setItem("token", responseData.token)
       alert("PARABAEINZ!")
       return
     }
 
-    const responseData = await request.json()
-    
     if (responseData.error) {
       alert(responseData.error)
       return
@@ -32,31 +32,26 @@ export default function () {
 
     alert("Cara! deu um erro tão foda, que eu nem sei o que foi!")
   }
-
+  
+  
   return <>
   <div className="modal">
   <form onSubmit={enviarDados}>
-      <h1>Cadastro</h1>
-      <div>
-      <label>Coloque um nome ou apelido: </label>
-      <input name="_name" placeholder="nickname" />
-      </div>
+      <h1>Escolha seu save</h1>
       
       <div>
-      <label>Coloque um email: </label>
-      <input name="email" placeholder="igotamail@email.com" />
+      <label>Digite seu nickname:</label>
+      <input name="nickname" placeholder="GamerMonster123" />
       </div>
-      
-      
+
       <div>
-      <label>Escolha uma senha: </label>
-      <input name="password" type="password" placeholder="********" />
+      <label>Digite a sua senha:</label>
+      <input name="password" placeholder="***********" />
       </div>
-      
-      
+    
       <div className="buttons">
-      <button type="button" onClick={() => navigate("/")}>Voltar</button>
-      <button type="submit">Registrar-se</button>
+      <button type="button" onClick={() => navigate("/Login")}>Sair da conta</button>
+      <button onClick={() => {}}></button>
       </div>
       
     </form>
