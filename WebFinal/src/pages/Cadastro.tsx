@@ -30,7 +30,6 @@ export default function () {
       return
     }
 
-    alert("Cara! deu um erro tão foda, que eu nem sei o que foi!")
   }
 
   return <>
@@ -47,16 +46,14 @@ export default function () {
       <input name="email" placeholder="igotamail@email.com" />
       </div>
       
-      
       <div>
       <label>Escolha uma senha: </label>
       <input name="password" type="password" placeholder="********" />
       </div>
       
-      
       <div className="buttons">
       <button type="button" onClick={() => navigate("/")}>Voltar</button>
-      <button type="submit">Registrar-se</button>
+      <button type="submit" onClick={() => alert("Usuário Registrado, volte e dê um login")}>Registrar-se</button>
       </div>
       
     </form>
